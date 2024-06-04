@@ -1,0 +1,21 @@
+.content {
+    background-color: grey;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    mat-card {
+        width: 30vw;
+        padding: 10px;
+
+        mat-form-field {
+            display: flex;
+            flex-direction: column;
+
+            .field {
+                width: 200px;
+            }
+        }
+    }
+}
