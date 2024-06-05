@@ -25,7 +25,7 @@ describe('HomeComponent', () => {
         MatCardModule,
         MatGridListModule
       ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]  // This allows usage of custom elements without error
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   });
 
@@ -35,19 +35,19 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('devrait être créé', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render a toolbar with the title "My Product App"', () => {
+  it('devrait afficher une barre d\'outils avec le titre "Mon application de produits"', () => {
     const compiled = fixture.nativeElement;
     const toolbar = compiled.querySelector('mat-toolbar');
     expect(toolbar).toBeTruthy();
     const span = toolbar.querySelector('span');
-    expect(span.textContent).toContain('My Product App');
+    expect(span.textContent).toContain('Mon application de produits');
   });
 
-  it('should render the product grid component', () => {
+  it('devrait afficher le composant de grille de produits', () => {
     const compiled = fixture.nativeElement;
     const productGrid = compiled.querySelector('app-product-grid');
     expect(productGrid).toBeTruthy();
