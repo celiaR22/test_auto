@@ -4,6 +4,18 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
+    browsers: ['ChromiumHeadless'],
+    customLaunchers: {
+      ChromiumHeadless: {
+        base: 'Chromium',
+        flags: [
+          '--headless',
+          '--no-sandbox',
+          '--disable-gpu',
+          '--disable-dev-shm-usage'
+        ]
+      }
+    },
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
