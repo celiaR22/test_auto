@@ -21,31 +21,31 @@ export interface Product {
 })
 export class ProductService {
 
-  private apiUrl = 'http://localhost:3502/';  
+  static apiUrl = 'http://localhost:3502/';  
   //  private apiUrl = 'http://0.0.0.0:3502/'; // URL API pour test Cypress
 
   constructor(private http: HttpClient) { }
 
   getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl + 'product/');
+    return this.http.get<Product[]>(ProductService.apiUrl + 'product/');
   }
 
   getProduct(id: number): Observable<Product> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${ProductService.apiUrl}/${id}`;
     return this.http.get<Product>(url);
   }
 
   addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+    return this.http.post<Product>(ProductService.apiUrl, product);
   }
 
   updateProduct(product: Product): Observable<Product> {
-    const url = `${this.apiUrl}/${product.id}`;
+    const url = `${ProductService.apiUrl}/${product.id}`;
     return this.http.put<Product>(url, product);
   }
 
   deleteProduct(id: number): Observable<void> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${ProductService.apiUrl}/${id}`;
     return this.http.delete<void>(url);
   }
 }
