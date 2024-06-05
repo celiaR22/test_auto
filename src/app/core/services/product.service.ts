@@ -21,7 +21,8 @@ export interface Product {
 })
 export class ProductService {
 
-  private apiUrl = 'http://localhost:4011/';  // Remplacez par l'URL de votre API
+  private apiUrl = 'http://localhost:3502/';  
+  //  private apiUrl = 'http://0.0.0.0:3502/'; // URL API pour test Cypress
 
   constructor(private http: HttpClient) { }
 
