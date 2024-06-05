@@ -4,23 +4,17 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    browsers: ['FirefoxHeadless'],
-    customLaunchers: {
-      FirefoxHeadless: {
-        base: 'Firefox',
-        flags: [
-          '-headless'
-        ]
-      }
-    },
+    browsers: ['Firefox'],
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'), 
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
+    
     client: {
       jasmine: {
         // you can add configuration options for Jasmine here
@@ -46,7 +40,6 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
     singleRun: false,
     restartOnFileChange: true
   });
