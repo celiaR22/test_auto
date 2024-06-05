@@ -76,12 +76,17 @@ export class SignInComponent implements OnInit {
   passwordMatchValidator: ValidatorFn = (formGroup: AbstractControl): ValidationErrors | null => {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+    if (!confirmPassword || confirmPassword === '') {
+      return null; // Ne rien faire si le champ confirmPassword est vide
+    }
+
     return password === confirmPassword ? null : { passwordsMismatch: true };
   }
 
   frenchPostalCodeValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
-      const postalCodeRegex = /^(?:[0-8]\d|9[0-8])\d{3}$/;
+      const postalCodeRegex = /^(?:(?:0[1-9])|(?:[1-8][0-9])|(?:9[0-5]))[0-9]{3}$/;
       const isValid = postalCodeRegex.test(control.value);
 
       return isValid ? null : { invalidPostalCode: true };
