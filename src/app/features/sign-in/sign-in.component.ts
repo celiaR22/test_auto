@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn,
 export class SignInComponent implements OnInit {
   signInForm!: FormGroup
   hidePassword: boolean = true;
-  constructor(private fb: FormBuilder) { }
+  hideConfirmPassword: boolean = true;
+  constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.createForm()
@@ -23,20 +25,25 @@ export class SignInComponent implements OnInit {
     this.hidePassword = !this.hidePassword;
   }
 
+  toggleConfirmPasswordVisibility() {
+    this.hideConfirmPassword = !this.hideConfirmPassword;
+  }
+
   createForm() {
     this.signInForm = this.fb.group({
       lastname: ['', [Validators.required]],
-      firstname: ['', [Validators.required, Validators.email]],
+      firstname: ['', [Validators.required]],
       password: ['', [Validators.required, this.customPasswordValidator()]],
       confirmPassword: ['', [Validators.required]],
-      postalCode: ['', [this.frenchPostalCodeValidator()]]
+      postalCode: ['', [Validators.required, this.frenchPostalCodeValidator()]]
     }, { validators: this.passwordMatchValidator });
   }
 
   validateForm() {
+
     if (this.signInForm.valid) {
       const formData = this.getFormData();
-      console.log(formData);
+      this.router.navigate(['/home']);
     }
   }
 
@@ -94,7 +101,7 @@ export class SignInComponent implements OnInit {
         errors.push(`Le champ ${fieldName} est requis.`);
       }
 
-      if (fieldName === 'confirmPassword' && this.signInForm.hasError('passwordsMismatch')) {
+      if (fieldName === 'confirmPassword' && this.signInForm.hasError('passwordsMismatch') && this.signInForm.get('confirmPassword')?.value) {
         errors.push('Les mots de passe ne correspondent pas.');
       }
 
