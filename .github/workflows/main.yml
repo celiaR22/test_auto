@@ -24,7 +24,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-
+    - name: Start server
+      run: npm start
+      # Attendre que le serveur soit prêt
+      # Peut-être utiliser un script personnalisé pour vérifier si le serveur est prêt
 
     - name: Run end-to-end tests with Cypress
       run: npm run cy:run
