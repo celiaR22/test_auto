@@ -30,7 +30,7 @@ jobs:
         run: ng test --watch=false --browsers=ChromeHeadless
 
       - name: Run Angular Server
-        run: ng serve
+      
 
       - name: Run Cypress tests
-        run: npm run cypress:run
+        run: npm run cypress:run && ng serve
