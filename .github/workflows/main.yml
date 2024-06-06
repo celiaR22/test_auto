@@ -28,8 +28,6 @@ jobs:
 
       - name: Run Angular tests
         run: ng test --watch=false --browsers=ChromeHeadless
-
-      - name: Run Angular Server
       
       - name: Run Cypress tests and ng serve
         run: |
