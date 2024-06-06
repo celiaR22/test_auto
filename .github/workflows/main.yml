@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - dev  # Modifier cette branche si nécessaire
-      
 
 jobs:
   angular_tests:
@@ -21,11 +20,17 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
       - name: Install dependencies
         run: npm install
 
+      - name: Build Angular app
+        run: ng build --prod
+
       - name: Run Angular tests
-        run: npm test
+        run: ng test --watch=false --browsers=ChromeHeadless
 
   cypress_tests:
     runs-on: ubuntu-latest
