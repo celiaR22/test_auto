@@ -77,4 +77,13 @@ describe('SignInComponent', () => {
 
     expect(errors).toContain('Le champ firstname est requis.');
   });
+
+  // it('should return field errors for invalid form fields', () => {
+  //   // Ajoutez une valeur invalide au champ lastname
+  //   component.signInForm.get('lastname')?.setValue('');
+  //   // Appelez la méthode getFormFieldErrors pour le champ lastname
+  //   const lastNameErrors = component.getFormFieldErrors('lastname');
+  //   // Vérifiez si la méthode retourne le message d'erreur attendu
+  //   expect(lastNameErrors).toContain('Le champ lastname est requis.');
+  // });
 });
