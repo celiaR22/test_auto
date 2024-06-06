@@ -32,23 +32,8 @@ jobs:
       - name: Run Angular tests
         run: ng test --watch=false --browsers=ChromeHeadless
 
-  cypress_tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+      - name: Run Angular Server
+        run: ng serve
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Start server
-        run: npm run start-server
-        background: true
-      
       - name: Run Cypress tests
         run: npm run cypress:run
