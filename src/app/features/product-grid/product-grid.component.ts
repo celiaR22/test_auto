@@ -10,14 +10,9 @@ import { ProductService } from 'src/app/core/services/product.service';
 
 
 export class ProductGridComponent implements OnInit {
-  PRODUCT_DATA: Product[] = [
-    // Exemple de données
-    {id: 1, creationDate: new Date(), productName: 'Produit 1', stock: 10, detailProduct: {description: 'Description 1', color: 'Rouge', price: 100}},
-    {id: 2, creationDate: new Date(), productName: 'Produit 2', stock: 5, detailProduct: {description: 'Description 2', color: 'Bleu', price: 150}},
-  ];
   displayedColumns: string[] = ['id', 'creationDate', 'productName', 'stock', 'description', 'color', 'price'];
   dataSource = new MatTableDataSource();
-  constructor( private productService :ProductService) { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(products => {
