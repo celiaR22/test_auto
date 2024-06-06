@@ -40,7 +40,6 @@ export class SignInComponent implements OnInit {
   }
 
   validateForm() {
-
     if (this.signInForm.valid) {
       const formData = this.getFormData();
       this.router.navigate(['/home']);
