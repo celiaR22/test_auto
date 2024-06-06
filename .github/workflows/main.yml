@@ -31,6 +31,8 @@ jobs:
       
       - name: Run Cypress tests and ng serve
         run: |
-          ng serve
+          ng serve --open &
+          while ! nc -z localhost 4200; do sleep 1; done
           npm run cy:run
+
     
