@@ -31,5 +31,5 @@ jobs:
       
       - name: Run Cypress tests and ng serve
         run: |
-          npm run cypress:run
+          npm run cy:run
           ng serve
