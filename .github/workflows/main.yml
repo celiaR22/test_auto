@@ -3,10 +3,11 @@ name: Angular_and_Cypress_Tests
 on:
   push:
     branches:
-      - main  # Modifier cette branche si nécessaire
+      - dev  # Modifier cette branche si nécessaire
   pull_request:
     branches:
-      - main  # Modifier cette branche si nécessaire
+      - dev  # Modifier cette branche si nécessaire
+      
 
 jobs:
   angular_tests:
