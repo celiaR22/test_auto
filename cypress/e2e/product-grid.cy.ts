@@ -2,7 +2,7 @@
 
 describe('Composant Grille de Produits', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/home');
   });
 
   it('devrait afficher correctement les en-têtes de la table', () => {
@@ -22,7 +22,7 @@ describe('Composant Grille de Produits', () => {
 
   it('devrait avoir des données correctes dans chaque cellule', () => {
     cy.get('.mat-cell').eq(1).invoke('text').should('match', /\d{2}\/\d{2}\/\d{4}/);
-    cy.get('.mat-cell').eq(2).invoke('text').should('not.be.empty'); 
+    cy.get('.mat-cell').eq(2).invoke('text').should('not.be.empty');
     cy.get('.mat-cell').eq(3).invoke('text').should('match', /^\s*\d+\s*$/);
     cy.get('.mat-cell').eq(4).invoke('text').should('not.be.empty');
     cy.get('.mat-cell').eq(5).invoke('text').should('not.be.empty');

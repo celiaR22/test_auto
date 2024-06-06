@@ -1,6 +1,6 @@
 describe('Home Page', () => {
   it('Cela devrait afficher le titre correct', () => {
-      cy.visit('/'); 
-      cy.contains('Mon application de produits'); 
+    cy.visit('/home');
+    cy.contains('Mon application de produits');
   });
 });

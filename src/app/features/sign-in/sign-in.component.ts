@@ -78,7 +78,7 @@ export class SignInComponent implements OnInit {
     const confirmPassword = formGroup.get('confirmPassword')?.value;
 
     if (!confirmPassword || confirmPassword === '') {
-      return null; // Ne rien faire si le champ confirmPassword est vide
+      return null;
     }
 
     return password === confirmPassword ? null : { passwordsMismatch: true };
