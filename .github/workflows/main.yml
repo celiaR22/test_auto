@@ -1,31 +1,38 @@
-name: CI
+name: Angular_and_Cypress_Tests
 
 on:
   push:
     branches:
-      - dev
+      - dev  # Modifier cette branche si nécessaire
   pull_request:
     branches:
-      - dev
+      - dev  # Modifier cette branche si nécessaire
 
 jobs:
-  build:
+  angular_tests:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.19'
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run unit tests
-      run: npm test
+      - name: Run Angular tests
+        run: ng test --watch=false --browsers=ChromeHeadless
+      
+      - name: Run Cypress tests and ng serve
+        run: |
+          ng serve --open &
+          while ! nc -z localhost 4200; do sleep 1; done
+          npm run cy:run
 
-    - name: Run end-to-end tests with Cypress
-      run: npm run cy:run
+    
