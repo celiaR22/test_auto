@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Angular app
-        run: ng build --prod
-
       - name: Run Angular tests
         run: ng test --watch=false --browsers=ChromeHeadless
 
