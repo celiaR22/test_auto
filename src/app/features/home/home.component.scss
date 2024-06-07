@@ -1,0 +1,14 @@
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 30;
+    margin-top: 4%;
+}
+
+app-product-grid {
+    max-width: 1500px;
+    width: 100%;
+    margin: 0 auto;
+}
