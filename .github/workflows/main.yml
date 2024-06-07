@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  angular_tests:
+  angular_and_cypress_tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -34,11 +34,28 @@ jobs:
         run: ng test --watch=false --browsers=ChromeHeadless
         continue-on-error: true
 
+      - name: Generate Angular test report
+        run: npm run generate-angular-report
+
+      - name: Upload Angular test report
+        uses: actions/upload-artifact@v3
+        with:
+          name: angular-report
+          path: output/report
+
       - name: Build Angular application
         run: ng build
 
-      - name: Upload build artifacts
+      - name: Run Cypress tests
+        id: cypress-tests
+        run: npm run cypress:run
+        continue-on-error: true
+
+      - name: Generate Cypress HTML report
+        run: npm run cypress:report
+
+      - name: Upload Cypress test report
         uses: actions/upload-artifact@v3
         with:
-          name: angular-build
-          path: dist/
+          name: cypress-report
+          path: output/report
