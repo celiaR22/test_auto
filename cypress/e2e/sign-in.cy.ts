@@ -3,7 +3,7 @@ describe('Sign In Form', () => {
         cy.visit('/');
     });
 
-    it('should enable the submit button when the form is valid', () => {
+    it('Devrais mettre le boutton valider en enable quand le formulaire est valide', () => {
         cy.contains('button', 'Valider').should('be.disabled');
         cy.get('input[formControlName="lastname"]').type('Doe');
         cy.get('input[formControlName="firstname"]').type('John');
@@ -14,7 +14,7 @@ describe('Sign In Form', () => {
         cy.contains('button', 'Valider').should('not.be.disabled');
     });
 
-    it('should disable the submit button when the form is invalid', () => {
+    it('Devrais disable le boutton valider quand le formulaire est invalide', () => {
         cy.contains('button', 'Valider').should('be.disabled');
         cy.get('input[formControlName="lastname"]').type('Doe');
         cy.get('input[formControlName="firstname"]').type('John');
@@ -23,7 +23,7 @@ describe('Sign In Form', () => {
         cy.contains('button', 'Valider').should('be.disabled');
     });
 
-    it('should display or hide password when click on the visibility button of password field', () => {
+    it('Devrais afficher ou cacher le mot de passe quand on clique sur l\'icone de visibilité', () => {
         const passwordInput = 'input[formControlName="password"]';
         const passwordValue = 'Password123!';
         cy.get(passwordInput).type(passwordValue);
@@ -35,7 +35,7 @@ describe('Sign In Form', () => {
     });
 
 
-    it('should display postal code field in red with error when not filled correctly', () => {
+    it('Devrais afficher une erreur sur le  champ du code postal si la valeur est incorrecte, et aucune erreur si la valeur est correcte', () => {
         const postalCodeInput = 'input[formControlName="postalCode"]';
         cy.get(postalCodeInput).type('123');
         cy.get(postalCodeInput).blur();
@@ -44,7 +44,7 @@ describe('Sign In Form', () => {
         cy.contains('.mat-error', 'Le code postal n\'est pas valide.').should('not.exist');
     });
 
-    it('should redirect to home page after form submission', () => {
+    it('Devrais rediriger sur la page accueil si le formulaire est valider et valide', () => {
         cy.get('input[formControlName="lastname"]').type('Doe');
         cy.get('input[formControlName="firstname"]').type('John');
         cy.get('input[formControlName="password"]').type('Password123!');
@@ -54,7 +54,7 @@ describe('Sign In Form', () => {
         cy.url().should('include', '/home');
     });
 
-    it('should show and hide the reset button based on input value', () => {
+    it('Devrais afficher ou cacher le boutton de reset du champ nom si il est remplis', () => {
         const lastnameInputSelector = 'input[formControlName="lastname"]';
         const resetButtonSelector = 'button[aria-label="Clear"]';
         cy.get(lastnameInputSelector).should('have.value', '');
@@ -66,7 +66,7 @@ describe('Sign In Form', () => {
         cy.get(resetButtonSelector).should('not.exist');
     });
 
-    it('should show and hide the reset button based on input value and clear the input on click', () => {
+    it('Devrais afficher ou cacher le boutton de reset du champ prénom si il est remplis', () => {
         const firstnameInputSelector = 'input[formControlName="firstname"]';
         const resetButtonSelector = 'button[aria-label="Clear"]';
         cy.get(firstnameInputSelector).should('have.value', '');
