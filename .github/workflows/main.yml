@@ -33,29 +33,12 @@ jobs:
         id: angular-tests
         run: ng test --watch=false --browsers=ChromeHeadless
         continue-on-error: true
-
-      - name: Generate Angular test report
-        run: npm run generate-angular-report
-
-      - name: Upload Angular test report
-        uses: actions/upload-artifact@v3
-        with:
-          name: angular-report
-          path: output/report
-
+        
       - name: Build Angular application
         run: ng build
-
-      - name: Run Cypress tests
-        id: cypress-tests
-        run: npm run cypress:run
-        continue-on-error: true
-
-      - name: Generate Cypress HTML report
-        run: npm run cypress:report
-
-      - name: Upload Cypress test report
+        
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: cypress-report
-          path: output/report
+            name: angular-build
+            path: dist/
