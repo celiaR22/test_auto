@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - dev
+      - master
   pull_request:
     branches:
-      - dev
+      - master
 
 jobs:
   build:
@@ -34,23 +34,11 @@ jobs:
       run: npm run cy:run
       continue-on-error: true
 
-    - name: Send notification if tests fail
-      if: failure()
-      uses: dawidd6/action-send-mail@v3
+    - name: Publish test results as artifact
+      if: always()
+      uses: actions/upload-artifact@v2
       with:
-        server_address: smtp.office365.com
-        server_port: 587
-        username: ${{ secrets.MAIL_USERNAME }}
-        password: ${{ secrets.MAIL_PASSWORD }}
-        subject: 'CI Test Failure Notification'
-        to: 'recipient@example.com'
-        from: 'CI Bot <your-email@example.com>'
-        body: |
-          Hello,
-
-          This is an automated message to inform you that the CI tests have failed.
-
-          Please check the build logs for more details.
-
-          Regards,
-          Your CI Bot
+        name: test-results
+        path: |
+          ./path/to/unit/test/results
+          ./path/to/cypress/test/results
