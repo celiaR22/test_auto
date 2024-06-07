@@ -3,10 +3,10 @@ name: Angular_and_Cypress_Tests
 on:
   push:
     branches:
-      - dev  # Modifier cette branche si nécessaire
+      - dev  
   pull_request:
     branches:
-      - dev  # Modifier cette branche si nécessaire
+      - dev  
 
 jobs:
   angular_tests:
@@ -55,14 +55,11 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: 'CI Test Failure Notification'
-          to: ${{ secrets.MAIL_USERNAME }}  # Remplacez par l'adresse email du destinataire
-          from: ${{ secrets.MAIL_USERNAME }}  # Remplacez par votre adresse email Outlook
+          to: ${{ secrets.MAIL_USERNAME }}
+          from: ${{ secrets.MAIL_USERNAME }}  
           body: |
-            Hello,
-
-            This is an automated message to inform you that the CI tests have failed.
-
-            Please check the build logs for more details.
-
-            Regards,
-            Your CI Bot
+            Bonjour,
+            Message automatique pour vous informez que les test CI ont échoué.
+            Regarder les logs pour plus de détails.
+            Aller bisous,
+            Ton robot CI 
