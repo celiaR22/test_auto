@@ -55,8 +55,8 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: 'CI Test Failure Notification'
-          to: 'celia.rojas@outlook.com'  # Remplacez par l'adresse email du destinataire
-          from: 'CI Bot <celia.rojas@outlook.com>'  # Remplacez par votre adresse email Outlook
+          to: ${{ secrets.MAIL_USERNAME }}  # Remplacez par l'adresse email du destinataire
+          from: ${{ secrets.MAIL_USERNAME }}  # Remplacez par votre adresse email Outlook
           body: |
             Hello,
 
