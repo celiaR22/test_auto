@@ -3,10 +3,10 @@ name: Angular_and_Cypress_Tests
 on:
   push:
     branches:
-      - master  
+      - master
   pull_request:
     branches:
-      - master  
+      - master
 
 jobs:
   angular_tests:
@@ -34,9 +34,11 @@ jobs:
         run: ng test --watch=false --browsers=ChromeHeadless
         continue-on-error: true
 
-      - name: Publish test results as artifact
-        if: always()
-        uses: actions/upload-artifact@v2
+      - name: Build Angular application
+        run: ng build --prod
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: test-results
-          path: output
+          name: angular-build
+          path: dist/
