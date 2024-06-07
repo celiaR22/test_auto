@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -30,18 +30,24 @@ jobs:
         run: npm install
 
       - name: Run Angular tests
+        id: angular-tests
         run: ng test --watch=false --browsers=ChromeHeadless
         continue-on-error: true
-      
+
       - name: Run Cypress tests and ng serve
+        id: cypress-tests
         run: |
           ng serve --open &
           while ! nc -z localhost 4200; do sleep 1; done
           npm run cy:run
         continue-on-error: true
-    
+
+      - name: Set failure status
+        if: ${{ steps.angular-tests.outcome == 'failure' || steps.cypress-tests.outcome == 'failure' }}
+        run: echo "One or more tests have failed."
+
       - name: Send notification if tests fail
-        if: ${{ failure() }}
+        if: ${{ steps.angular-tests.outcome == 'failure' || steps.cypress-tests.outcome == 'failure' }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.office365.com
