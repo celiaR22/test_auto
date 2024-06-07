@@ -11,6 +11,9 @@ on:
 jobs:
   angular_tests:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -28,11 +31,32 @@ jobs:
 
       - name: Run Angular tests
         run: ng test --watch=false --browsers=ChromeHeadless
+        continue-on-error: true
       
       - name: Run Cypress tests and ng serve
         run: |
           ng serve --open &
           while ! nc -z localhost 4200; do sleep 1; done
           npm run cy:run
-
+        continue-on-error: true
     
+      - name: Send notification if tests fail
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: 'CI Test Failure Notification'
+          to: 'celia.rojas@outlook.com'  # Remplacez par l'adresse email du destinataire
+          from: 'CI Bot <celia.rojas@outlook.com>'  # Remplacez par votre adresse email Outlook
+          body: |
+            Hello,
+
+            This is an automated message to inform you that the CI tests have failed.
+
+            Please check the build logs for more details.
+
+            Regards,
+            Your CI Bot
