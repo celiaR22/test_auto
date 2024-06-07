@@ -44,7 +44,7 @@ describe('HomeComponent', () => {
     const toolbar = compiled.querySelector('mat-toolbar');
     expect(toolbar).toBeTruthy();
     const span = toolbar.querySelector('span');
-    expect(span.textContent).toContain('Mon application de test  ');
+    expect(span.textContent).toContain('Mon application de test');
   });
 
   it('devrait afficher le composant de grille de produits', () => {
