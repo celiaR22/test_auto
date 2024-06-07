@@ -35,7 +35,7 @@ jobs:
         continue-on-error: true
 
       - name: Build Angular application
-        run: ng build --prod
+        run: ng build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
